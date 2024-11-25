@@ -8,6 +8,7 @@ class personalData(models.Model):
     image = models.ImageField(upload_to='profile/', null=True, blank=True)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=15)
+    short_bio = models.CharField(max_length=250, null=True, blank=True)
     active = models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
