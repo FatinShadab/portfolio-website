@@ -45,7 +45,11 @@ class SocialLink(models.Model):
         ('StackOverflow', 'StackOverflow'),
         ('ResearchGate', 'ResearchGate'),
         ('GoogleScholar', 'GoogleScholar'),
-        ('PersonalWebsite', 'PersonalWebsite'),
+        ('CodeForces', 'CodeForces'),
+        ('LeetCode', 'LeetCode'),
+        ('Kaggle', 'Kaggle'),
+        ('YouTube', 'YouTube'),
+        ('HackerRank', 'HackerRank'),
     )
     
     name = models.CharField(max_length=100, choices=CHOICE)
