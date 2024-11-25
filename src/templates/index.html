@@ -101,6 +101,13 @@
           <div class="bg-white p-6 rounded-lg shadow-lg">
             <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Quick Facts</h3>
             {{ quick_fact.content | safe }}
+          <div class="mt-4">
+            <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Contact</h3>
+            <p class="text-lg">
+            <a href="mailto:{{ personal_info.email }}" class="text-orange-500 hover:underline">Mail me</a> or 
+            <a href="tel:{{ personal_info.phone }}" class="text-orange-500 hover:underline">Call me</a>
+            </p>
+          </div>
           </div>
         </div>
       </div>
@@ -217,6 +224,13 @@
           <div class="bg-white p-6 rounded-lg shadow-lg">
             <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Quick Facts</h3>
             {{ quick_fact.content | safe }}
+            <div class="mt-4">
+              <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Contact</h3>
+              <p class="text-lg">
+              <a href="mailto:{{ personal_info.email }}" class="text-orange-500 hover:underline">Mail me</a> or 
+              <a href="tel:{{ personal_info.phone }}" class="text-orange-500 hover:underline">Call me</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -226,7 +240,8 @@
 
   <!-- Footer -->
   <footer class="border-t-2 border-black py-4 text-center text-gray-600">
-    <p>© 2023 Tarek Hasan. All rights reserved.</p>
+    <p>© 2025 Tarek Hasan. All rights reserved.</p>
+    <p>Developed by <a href="https://github.com/UIU-Developers-Hub" class="text-orange-500 hover:underline">UIU Developers Hub</a><img src="{% static "assets/img/UIUDH-Logo.png" %}" class="inline-block h-6 ml-2"></p>
   </footer>
 
   <!-- Script for Mobile Dropdown -->
