@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from personalData import views
 
+admin.site.site_header = "Md. Tarek Hasan's Portfolio Admin"
+admin.site.site_title = "Md. Tarek Hasan's Admin Portal"
+admin.site.index_title = "Welcome to the Md. Tarek Hasan's Portfolio Admin Portal"
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin-mdth/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', views.index, name='index'),
 ]
