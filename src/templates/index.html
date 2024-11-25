@@ -91,7 +91,7 @@
       <!-- Mobile Sidebar -->
       <div class="md:hidden w-full mb-8">
         <div class="sticky top-24">
-        {% if personal_info %}
+        {% if personal_info and personal_info.get_image_url != '' %}
             <img src="static/{{ personal_info.get_image_url }}" alt="Profile of Tarek Hasan"
             class="w-full h-auto rounded-lg shadow-lg mb-6">
         {% else %}
@@ -214,7 +214,7 @@
       <!-- Right Column - Sidebar -->
       <div class="hidden md:block md:col-span-4 md:order-1 w-full">
         <div class="sticky top-24">
-        {% if personal_info %}
+          {% if personal_info and personal_info.get_image_url != '' %}
             <img src="static/{{ personal_info.get_image_url }}" alt="Profile of Tarek Hasan"
             class="w-full h-auto rounded-lg shadow-lg mb-6">
         {% else %}
