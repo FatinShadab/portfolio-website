@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+  <style>
+    .experienceList, .tp-desc {
+        padding: 0 2.5rem
+    }
+
+    .experienceList ul li , .tp-desc ul li {
+        list-style-type: disc;
+    }
+</style>
+</head>
+
+<body class="min-h-screen bg-[#f5f5f5] font-serif">
+
+  <!-- Header -->
+  <header class="border-b-2 border-t-2 border-black py-8 px-4 my-4">
+    <h1 class="text-center">
+      <span class="text-5xl md:text-7xl text-gray-700">MD Tarek </span>
+      <span class="text-5xl md:text-7xl text-orange-500">Hasan</span>
+    </h1>
+    <p class="text-center text-lg text-gray-600">
+    {% for slink in social_links %}
+      <a href="{{ slink.link }}">{{ slink.name }}</a>
+      {% if not forloop.last %}
+        <span class="mx-2">|</span>
+      {% endif %}
+    {% endfor %}
+    </p>
+  </header>
+
+  <!-- Navigation -->
+  <div class="w-full border-y-2 border-black bg-gray-800 text-white py-2 sticky top-0 z-10">
+    <!-- Mobile Dropdown -->
+    <div class="md:hidden">
+      <button id="menu-toggle" class="flex items-center justify-between w-full px-4 py-2">
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div id="dropdown" class="hidden w-full bg-gray-800 text-white">
+        <ul>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#biography">Biography</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#education">Educational Background</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#research">Research Interest</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#experience">Professional Experience</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#teaching">Teaching Portfolio</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#awards">Awards & Recognition</a></li>
+          <li class="px-4 py-2 hover:bg-gray-700"><a href="#publications">Publications</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:block">
+      <div class="flex justify-center space-x-4 px-4">
+        <a href="#biography"
+          class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Biography</a>
+        <a href="#education"
+          class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Educational Background</a>
+        <a href="#research" class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Research
+          Interest</a>
+        <a href="#experience"
+          class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Professional
+          Experience</a>
+        <a href="#teaching" class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Teaching
+          Portfolio</a>
+        <a href="#awards" class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Awards &
+          Recognition</a>
+        <a href="#publications"
+          class="whitespace-nowrap px-3 py-1 text-sm transition-colors hover:text-orange-400">Publications</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-12 gap-8">
+
+      <!-- Mobile Sidebar -->
+      <div class="md:hidden w-full mb-8">
+        <div class="sticky top-24">
+        {% if personal_info %}
+            <img src="static/{{ personal_info.get_image_url }}" alt="Profile of Tarek Hasan"
+            class="w-full h-auto rounded-lg shadow-lg mb-6">
+        {% else %}
+            <img src="{% static "assets/img/default.jpg" %}" alt="Profile of Tarek Hasan"
+            class="w-full h-auto rounded-lg shadow-lg mb-6">
+        {% endif %}
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Quick Facts</h3>
+            {{ quick_fact.content | safe }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Column - Main Content -->
+      <div class="md:col-span-8 md:order-1 w-full">
+        <div class="py-6" id="biography"></div>
+        <section>
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Biography</h2>
+          <div class="space-y-4 text-lg leading-relaxed">
+            {{ biography.content | safe }}
+          </div>
+        </section>
+
+        <div class="py-6" id="education"></div>
+        <section>
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Educational Background</h2>
+          <div class="space-y-6">
+            {% for edu in education %}
+                <div class="border-l-2 border-orange-500 pl-4">
+                    <h3 class="text-xl font-bold"> {{ edu.program }} </h3>
+                    <p class="text-gray-600"> {{ edu.provider }} </p>
+                    {% if edu.status == "Completed" %}
+                        <p class="text-gray-600"> {{ edu.result }} </p>
+                    {% else %}
+                        <p class="text-gray-600">Current</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        
+        <div class="py-6" id="research"></div>
+        <section>
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Research Interest</h2>
+          <ul class="list-disc list-inside space-y-2 text-lg">
+            {% for interest in research_interests %}
+                <li> {{ interest.field }} </li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        
+        <div class="py-6" id="experience"></div>
+        <section>
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Professional Experience</h2>
+          <div class="space-y-6">
+            {% for exp in experiences %}
+                <div class="border-l-2 border-orange-500 pl-4">
+                    <h3 class="text-xl font-bold">{{ exp.position}}</h3>
+                    <a class="text-gray-600" href="{{ exp.organization_link }}">{{ exp.organization }}</a>
+                    {% if exp.at_present %}
+                        <p class="text-gray-600">Current</p>
+                    {% else %}
+                        <p class="text-gray-600">{{ exp.start_date }} - {{ exp.end_date }}</p>
+                    {% endif %}
+                    <div class="experienceList">
+                    {{ exp.description | safe }}
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <div class="py-6" id="teaching"></div>
+        <section>
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Teaching Portfolio</h2>
+          {% for tp in teaching_portfolio %}
+            <div class="space-y-4 mb-3">
+                <h3 class="text-2xl font-semibold">{{ tp.title }}</h3>
+                <div class="tp-desc">
+                    {{ tp.description | safe }}
+                </div>
+            </div>
+          {% endfor %}
+        </section>
+
+        <div class="py-6" id="awards"></div>
+        <section id="">
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Awards & Recognition</h2>
+          <ul class="list-disc list-inside space-y-2 text-lg">
+            {% for award in awards %}
+                <li>{{ award.title }}</li>
+                <div class="text-gray-600 mt-8 ml-8">{{ award.description | safe }}</div>
+            {% endfor %}
+          </ul>
+        </section>
+
+        <div class="py-6" id="publications"></div>
+        <section id="">
+          <h2 class="text-4xl font-bold mb-6 border-b-2 border-black pb-2">Publications</h2>
+          <div class="space-y-4 text-lg">
+            {% for pub in publications %}
+                <div>
+                    <a href="{{ pub.link }}" class="font-semibold text-lg">{{ pub.title }}</a>
+                    <p class="text-gray-600">{{ pub.publication_body }}</p>
+                </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column - Sidebar -->
+      <div class="hidden md:block md:col-span-4 md:order-1 w-full">
+        <div class="sticky top-24">
+        {% if personal_info %}
+            <img src="static/{{ personal_info.get_image_url }}" alt="Profile of Tarek Hasan"
+            class="w-full h-auto rounded-lg shadow-lg mb-6">
+        {% else %}
+            <img src="{% static "assets/img/default.jpg" %}" alt="Profile of Tarek Hasan"
+            class="w-full h-auto rounded-lg shadow-lg mb-6">
+        {% endif %}
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">Quick Facts</h3>
+            {{ quick_fact.content | safe }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t-2 border-black py-4 text-center text-gray-600">
+    <p>© 2023 Tarek Hasan. All rights reserved.</p>
+  </footer>
+
+  <!-- Script for Mobile Dropdown -->
+  <script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const dropdown = document.getElementById('dropdown');
+    const menuIcon = document.getElementById('menu-icon');
+
+    toggleButton.addEventListener('click', () => {
+      dropdown.classList.toggle('hidden');
+      menuIcon.classList.toggle('rotate-180');
+    });
+  </script>
+
+  <script src="{% static "js/script.js" %}"></script>
+</body>
+
+<style>
+  @media (min-width: 768px) {
+    .md\\:col-span-4 {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .md\\:col-span-4 {
+      display: block;
+    }
+  }
+</style>
+
+</html>
